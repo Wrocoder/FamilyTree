@@ -13,3 +13,7 @@ django = "5.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.config]
+virtualenvs.in-project = true
