@@ -15,8 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from family_tree.views import page_not_found
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('family_tree.urls')),
+    path('__debug__/', include('debug_toolbar.urls')),
+
 ]
+
+handler404 = page_not_found
+
+admin.site.site_header = "Admin Panel"
+admin.site.index_title = "Family Tree Site"
