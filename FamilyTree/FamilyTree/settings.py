@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'family_tree.apps.FamilyTreeConfig',
+    'users.apps.UsersConfig',
     'debug_toolbar',
 
 ]
@@ -140,3 +141,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
+
+DEFAULT_USER_IMAGE = MEDIA_URL + 'users/default.png'
