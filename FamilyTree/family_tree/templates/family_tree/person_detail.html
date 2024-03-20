@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h2>{{ person.full_name }}</h2>
 <p>Data of birth: {{ person.birth_date }}</p>
 
@@ -8,3 +12,6 @@
         <li>{{ relationship.get_relationship_type_display }} с {{ relationship.to_person.full_name }}</li>
     {% endfor %}
 </ul>
+
+
+{% endblock %}
