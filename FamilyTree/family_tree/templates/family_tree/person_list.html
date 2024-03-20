@@ -1,6 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<a href="{% url 'new_family_member' %}">Add a new family member</a>
+
 <h2>List of persons</h2>
 <ul>
+
     {% for person in people %}
         <li><a href="{% url 'person_detail' person.pk %}">{{ person.full_name }}</a></li>
     {% endfor %}
 </ul>
+
+{% endblock %}

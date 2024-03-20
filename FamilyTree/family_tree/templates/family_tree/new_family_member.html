@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Add new Family member:</h3>
+<form action="{% url 'new_family_member' %}" method='post'>
+	 {% csrf_token %}
+	 {{ form.as_p }}
+	 <button name="submit">add family member</button>
+ </form>
+
+
+{% endblock %}
