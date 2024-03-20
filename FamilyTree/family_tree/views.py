@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotFound
 from django.shortcuts import render
-
+from django.urls import reverse
 from .models import Person, FamilyRelationship
+from .forms import PersonForm
 
 
 def index(request):
@@ -42,3 +43,17 @@ def person_detail(request, pk):
     person = Person.objects.get(pk=pk)
     relationships = FamilyRelationship.objects.filter(from_person=person)
     return render(request, 'family_tree/person_detail.html', {'person': person, 'relationships': relationships})
+
+
+def new_family_member(request):
+    if request.method != 'POST':
+        form = PersonForm()
+    else:
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('person_list'))
+
+    context = {'form': form}
+    return render(request, 'family_tree/new_family_member.html', context)
+
