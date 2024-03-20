@@ -8,7 +8,7 @@ app_name = 'users'
 
 urlpatterns = [
     path('login/', views.LoginUser.as_view(), name='login'),
-    path('logout/', LogoutView.as_view(), name='logout'),
+    path('logout/', views.user_logout, name='logout'),
 
     path('password-change/', views.UserPasswordChange.as_view(), name='password_change'),
     path('password-change/done/', PasswordChangeDoneView.as_view(
