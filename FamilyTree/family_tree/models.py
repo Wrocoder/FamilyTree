@@ -4,6 +4,9 @@ from django.db import models
 class Family(models.Model):
     name = models.CharField(max_length=100)
 
+    class Meta:
+        verbose_name_plural = 'Family'
+
 
 class Person(models.Model):
     family = models.ForeignKey(Family, on_delete=models.CASCADE, related_name='members')
@@ -17,6 +20,9 @@ class Person(models.Model):
     hobbies = models.TextField(blank=True)
     photo = models.ImageField(upload_to='photos/', blank=True, null=True)
     notes = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Person'
 
     def full_name(self):
         return f"{self.first_name} {self.middle_name} {self.last_name}"
@@ -53,6 +59,7 @@ class FamilyRelationship(models.Model):
     class Meta:
         # avoid duplication relationships
         unique_together = ('from_person', 'to_person', 'relationship_type')
+        verbose_name_plural = 'Family Relationship'
 
     def __str__(self):
         return f"{self.get_relationship_type_display()} from {self.from_person.full_name()} to {self.to_person.full_name()}"
