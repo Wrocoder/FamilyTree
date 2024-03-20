@@ -1,13 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
-
+from django.urls import reverse
 from .models import Person, FamilyRelationship
+from .forms import PersonForm
 
 
 def index(request):
     return render(request, 'family_tree/index.html', {'title': 'Family Tree'})
-
 
 
 @login_required
@@ -24,10 +24,12 @@ def page_not_found(request, exception):
     return HttpResponseNotFound("<h1>Page not found, OOOPS...</h1>")
 
 
+@login_required
 def person_list(request):
-
     people = Person.objects.all()
     return render(request, 'family_tree/person_list.html', {'people': people})
+
+
 # @login_required
 # def person_list(request):
 #     """ View all persons """
@@ -41,3 +43,17 @@ def person_detail(request, pk):
     person = Person.objects.get(pk=pk)
     relationships = FamilyRelationship.objects.filter(from_person=person)
     return render(request, 'family_tree/person_detail.html', {'person': person, 'relationships': relationships})
+
+
+def new_family_member(request):
+    if request.method != 'POST':
+        form = PersonForm()
+    else:
+        form = PersonForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('person_list'))
+
+    context = {'form': form}
+    return render(request, 'family_tree/new_family_member.html', context)
+
