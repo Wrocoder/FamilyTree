@@ -7,6 +7,9 @@ class Family(models.Model):
     class Meta:
         verbose_name_plural = 'Family'
 
+    def __str__(self):
+        return self.name
+
 
 class Person(models.Model):
     family = models.ForeignKey(Family, on_delete=models.CASCADE, related_name='members')
@@ -26,6 +29,9 @@ class Person(models.Model):
 
     def full_name(self):
         return f"{self.first_name} {self.middle_name} {self.last_name}"
+
+    def __str__(self):
+        return self.full_name()
 
 
 class FamilyRelationship(models.Model):

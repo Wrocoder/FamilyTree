@@ -5,15 +5,16 @@ from .models import Person, FamilyRelationship, Family
 
 @admin.register(Person)
 class PersonAdmin(admin.ModelAdmin):
-    list_display = ('id', 'full_name', 'birth_date', 'photo', 'family_id')
+    list_display = ('id', 'full_name', 'birth_date', 'family')
     list_display_links = ('full_name',)
+    ordering = ['birth_date']
     list_per_page = 10
     search_fields = ('full_name',)
 
 
 @admin.register(Family)
 class FamilyAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('id', 'name',)
     list_display_links = ('name',)
     list_per_page = 10
     search_fields = ('name',)
