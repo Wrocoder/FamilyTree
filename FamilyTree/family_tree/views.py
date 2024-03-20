@@ -1,24 +1,23 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound
 from django.shortcuts import render
 
 from .models import Person, FamilyRelationship
 
 
 def index(request):
-    return render(request, 'family_tree/index.html')
+    return render(request, 'family_tree/index.html', {'title': 'Family Tree'})
 
 
+
+@login_required
 def about(request):
     return render(request, 'family_tree/about.html', {'title': 'About Us'})
 
 
+@login_required
 def contact(request):
-    pass
-
-
-def login(request):
-    pass
+    return render(request, 'family_tree/contact.html', {'title': 'Contact Us'})
 
 
 def page_not_found(request, exception):
