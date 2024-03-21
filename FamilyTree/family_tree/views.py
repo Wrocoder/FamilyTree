@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.http import HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .models import Person, FamilyRelationship
@@ -56,4 +56,3 @@ def new_family_member(request):
 
     context = {'form': form}
     return render(request, 'family_tree/new_family_member.html', context)
-
